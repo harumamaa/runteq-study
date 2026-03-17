@@ -7,9 +7,9 @@ class UserSessionsController < ApplicationController
     @user = User.find_by(email: params[:email])&.authenticate(params[:password])
 
     if @user
-      session[:user_id] = @user.id
       redirect_to root_path, success: 'ログインしました'
     else
+      flash.now[:danger] = 'ログインに失敗しました'
       render :new, status: :unprocessable_entity
     end
   end
