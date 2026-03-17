@@ -8,9 +8,9 @@ class UserSessionsController < ApplicationController
 
     if @user
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to root_path, success: 'ログインしました'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
