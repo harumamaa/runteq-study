@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, t('users.create.success')
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: t('users.create.success')
     else
       flash.now[:danger] = t('users.create.failure')
       #status: :unprocessable_entity : エラーが起きたことをブラウザに伝える
