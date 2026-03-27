@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
   before_action :require_login
+  add_flash_types :success, :danger
 
   def logged_in?
     !!current_user
@@ -14,8 +15,6 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
-
-  add_flash_types :success, :danger
 
   private
 
