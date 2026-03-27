@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
+  add_flash_types :success, :danger
+
   private
 
   def require_login
